@@ -28,10 +28,14 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 const sidebarItems = [
-  { icon: Home, label: "Dashboard", href: "/dashboard", active: true },
+  { icon: Home, label: "Dashboard", href: "/", active: true },
   { icon: MessageCircle, label: "Conversation", href: "/conversation" },
-  { icon: Calendar, label: "Appointment Request", href: "/appointments" },
-  { icon: Activity, label: "RPM Entry + Tracker", href: "/rpm" },
+  {
+    icon: Calendar,
+    label: "Appointment Request",
+    href: "/appointment/request",
+  },
+  { icon: Activity, label: "RPM Entry + Tracker", href: "/rpm-entry-tracker" },
 ];
 
 const bottomSidebarItems = [

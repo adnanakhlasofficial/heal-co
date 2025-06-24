@@ -39,7 +39,7 @@ export default function Appointment() {
   return (
     <section className="bg-gray-50">
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto bg-white rounded-lg shadow-md p-6">
+      <div className="bg-white rounded-lg shadow-md p-6">
         <Header
           title="Schedule An Appointment"
           description="Fill out the form below to request an appointment with a healthcare
@@ -166,7 +166,7 @@ export default function Appointment() {
         </div>
       </div>
       {/* Submit Button */}
-      <div className="mt-8 flex justify-end max-w-6xl mx-auto">
+      <div className="mt-8 flex justify-end">
         <Button size="lg" className="px-8">
           Request Appointment
         </Button>
