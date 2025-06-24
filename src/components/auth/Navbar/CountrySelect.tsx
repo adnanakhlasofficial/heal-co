@@ -5,9 +5,7 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue,
 } from "@/components/ui/select";
-import { ChevronDown } from "lucide-react";
 import { useState } from "react";
 
 const countries = [

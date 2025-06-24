@@ -1,4 +1,5 @@
 import Header from "@/components/dashboard/Header/Header";
+import HealthMetricsTimeline from "@/components/dashboard/RPMEntry/HealthMetricsTimeline";
 import NewReading from "@/components/dashboard/RPMEntry/NewReading";
 import SingleRPMCard from "@/components/dashboard/RPMEntry/SingleRPMCard";
 import { format } from "date-fns";
@@ -35,7 +36,7 @@ export default function RPMEntryTracker() {
         description={`Last update at ${format(new Date(), "PP")}`}
       />
 
-      <div className="flex flex-col md:flex-row gap-4 p-6">
+      <div className="flex flex-col md:flex-row gap-4 my-6">
         {vitalSigns.map((vital, index) => (
           <SingleRPMCard
             key={index}
@@ -47,7 +48,8 @@ export default function RPMEntryTracker() {
         ))}
       </div>
 
-      <div>
+      <div className="flex flex-col md:flex-row gap-4">
+        <HealthMetricsTimeline />
         <NewReading />
       </div>
     </section>
