@@ -86,9 +86,9 @@ export default function AppointmentPage() {
                     className=" w-full"
                     navLayout="after"
                     classNames={{
-                      month_caption: "flex p-6 pb-0",
+                      month_caption: "flex px-6 pb-0",
                       caption_label: "text-xl font-semibold",
-                      nav: "flex flex-row justify-end p-6 gap-2 pb-0",
+                      nav: "flex flex-row justify-end px-6 gap-2 pb-0",
                       month: "w-full grid grid-cols-2",
                       day_button: "w-9 h-9 mx-auto rounded-full",
                       today:
@@ -101,7 +101,6 @@ export default function AppointmentPage() {
                       weekdays: "flex p-4 pb-2",
                       week: "flex px-4 py-2",
                     }}
-                    pagedNavigation={true}
                   />
                 </CardContent>
               </Card>
