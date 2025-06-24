@@ -38,7 +38,7 @@ export default function AppointmentPage() {
   return (
     <section className="bg-gray-50">
       {/* Main Content */}
-      <div className="max-w-6xl mx-auto bg-white rounded-lg shadow-md p-6">
+      <div className="max-w-7xl mx-auto bg-white rounded-lg shadow-md p-6">
         <div className="mb-6">
           <h1 className="text-2xl font-bold mb-2">Schedule An Appointment</h1>
           <p className="text-gray-600">
@@ -62,7 +62,7 @@ export default function AppointmentPage() {
                 value={selectedSpecialty}
                 onValueChange={setSelectedSpecialty}
               >
-                <SelectTrigger>
+                <SelectTrigger className="bg-white rounded-full w-full">
                   <SelectValue placeholder="Select a specialty category" />
                 </SelectTrigger>
                 <SelectContent>
@@ -77,14 +77,30 @@ export default function AppointmentPage() {
 
             {/* Calendar */}
             <div>
-              <Card className="py-0">
-                <CardContent className="py-0 px-0">
+              <Card className="py-0 border-0 shadow-none">
+                <CardContent className="py-0 px-0 !border-0">
                   <Calendar
                     mode="single"
                     selected={selectedDate}
                     onSelect={setSelectedDate}
-                    className="rounded-md w-full"
+                    className=" w-full"
                     navLayout="after"
+                    classNames={{
+                      month_caption: "flex p-6 pb-0",
+                      caption_label: "text-xl font-semibold",
+                      nav: "flex flex-row justify-end p-6 gap-2 pb-0",
+                      month: "w-full grid grid-cols-2",
+                      day_button: "w-9 h-9 mx-auto rounded-full",
+                      today:
+                        "w-9 h-9 mx-auto rounded-full bg-purple-600 text-white font-semibold",
+                      day: "w-9 h-9 mx-auto rounded-full",
+                      month_grid: "col-span-2 mt-4 bg-white rounded-lg w-full",
+                      root: "!bg-gray-100/60 !border-none !shadow-none !p-0",
+                      button_next: "bg-white p-2 rounded-full text-black",
+                      button_previous: "bg-white p-2 rounded-full text-black",
+                      weekdays: "flex p-4 pb-2",
+                      week: "flex px-4 py-2",
+                    }}
                     pagedNavigation={true}
                   />
                 </CardContent>
@@ -104,7 +120,7 @@ export default function AppointmentPage() {
                 placeholder="Please briefly describe your reason for a visit..."
                 value={reason}
                 onChange={(e) => setReason(e.target.value)}
-                className="min-h-[100px]"
+                className="min-h-10 bg-white rounded-full resize-none"
               />
             </div>
           </div>
