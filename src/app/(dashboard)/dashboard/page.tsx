@@ -1,6 +1,8 @@
 "use client";
 
 import ActionCard from "@/components/dashboard/ActionCard/ActionCard";
+import { UpcomingSessions } from "@/components/dashboard/Appointment/UpcomingAppointments";
+import { RecentConversation } from "@/components/dashboard/RecentConversation/RecentConversation";
 import { RPMEntry } from "@/components/dashboard/RPMEntry/RPMEntry";
 import { WelcomeHero } from "@/components/dashboard/WelcomeHero/WelcomeHero";
 import {
@@ -9,15 +11,6 @@ import {
   MessagesSquare,
   Radical,
 } from "lucide-react";
-import React from "react";
-
-// interface StartChatProps {
-//   title?: string;
-//   description?: string;
-//   buttonText?: string;
-//   className?: string;
-//   Icon?: React.ComponentType<React.SVGProps<SVGSVGElement>>;
-// }
 
 export default function page() {
   return (
@@ -38,6 +31,9 @@ export default function page() {
         buttonText="Track Now"
         ButtonIcon={HeartPulse}
       />
+      <RecentConversation />
+
+      <UpcomingSessions />
     </section>
   );
 }
