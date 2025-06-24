@@ -1,5 +1,6 @@
 "use client";
 
+import Header from "@/components/dashboard/Header/Header";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { Card, CardContent } from "@/components/ui/card";
@@ -14,7 +15,7 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
 
-export default function AppointmentPage() {
+export default function Appointment() {
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(
     new Date()
   );
@@ -39,13 +40,11 @@ export default function AppointmentPage() {
     <section className="bg-gray-50">
       {/* Main Content */}
       <div className="max-w-7xl mx-auto bg-white rounded-lg shadow-md p-6">
-        <div className="mb-6">
-          <h1 className="text-2xl font-bold mb-2">Schedule An Appointment</h1>
-          <p className="text-gray-600">
-            Fill out the form below to request an appointment with a healthcare
-            provider.
-          </p>
-        </div>
+        <Header
+          title="Schedule An Appointment"
+          description="Fill out the form below to request an appointment with a healthcare
+              provider."
+        />
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Left Column - Form */}

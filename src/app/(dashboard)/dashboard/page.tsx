@@ -12,7 +12,7 @@ import {
   Radical,
 } from "lucide-react";
 
-export default function page() {
+export default function Home() {
   return (
     <section className="grid grid-cols-3 gap-6">
       <WelcomeHero />
