@@ -1,31 +1,32 @@
 "use client";
 
-import { useState } from "react";
-import {
-  Home,
-  MessageCircle,
-  Calendar,
-  Activity,
-  HelpCircle,
-  Headphones,
-  LogOut,
-  Search,
-  Bell,
-  Settings,
-  Menu,
-  X,
-  ChevronLeft,
-  ChevronRight,
-} from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Input } from "@/components/ui/input";
+import {
+  Activity,
+  Bell,
+  Calendar,
+  ChevronLeft,
+  ChevronRight,
+  Headphones,
+  HelpCircle,
+  Home,
+  LogOut,
+  Menu,
+  MessageCircle,
+  Search,
+  Settings,
+  X,
+} from "lucide-react";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
 
 const sidebarItems = [
   { icon: Home, label: "Dashboard", href: "/", active: true },
@@ -51,6 +52,7 @@ export default function DashboardLayout({
 }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const pathname = usePathname();
 
   const toggleCollapse = () => {
     setSidebarCollapsed(!sidebarCollapsed);
@@ -228,7 +230,9 @@ export default function DashboardLayout({
               >
                 <Menu className="h-5 w-5" />
               </Button>
-              <h1 className="text-xl font-semibold text-gray-900">Dashboard</h1>
+              <h1 className="text-xl font-semibold text-gray-900 capitalize">
+                {pathname.split("/")[1]}
+              </h1>
             </div>
 
             {/* Right side - Search, Notifications, Profile */}
