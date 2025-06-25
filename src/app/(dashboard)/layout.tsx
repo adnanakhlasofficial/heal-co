@@ -231,7 +231,7 @@ export default function DashboardLayout({
                 <Menu className="h-5 w-5" />
               </Button>
               <h1 className="text-xl font-semibold text-gray-900 capitalize">
-                {pathname.split("/")[1]}
+                {pathname === "/" ? "dashboard" : pathname.split("/")[1]}
               </h1>
             </div>
 
