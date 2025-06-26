@@ -11,20 +11,23 @@ import {
 import { Input } from "@/components/ui/input";
 import {
   Activity,
+  ChevronRight as ArrowRight,
   Bell,
   Calendar,
-  ChevronLeft,
-  ChevronRight,
   Headphones,
   HelpCircle,
   Home,
+  Info,
   LogOut,
   Menu,
   MessageCircle,
+  PanelRightOpen,
   Search,
   Settings,
+  User,
   X,
 } from "lucide-react";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
@@ -44,6 +47,55 @@ const bottomSidebarItems = [
   { icon: Headphones, label: "Support", href: "/support" },
   { icon: LogOut, label: "Log out", href: "/logout" },
 ];
+
+function ProfileDropdownMenu() {
+  return (
+    <DropdownMenuContent
+      className="w-64 p-0 rounded-xl shadow-lg border border-gray-100"
+      align="start"
+      forceMount
+      style={{ boxShadow: "0 4px 24px rgba(0,0,0,0.12)" }}
+    >
+      <div className="px-4 pt-4 pb-2">
+        <div className="font-semibold text-gray-900 text-base">
+          Madun Laduni
+        </div>
+        <div className="text-xs text-gray-500 mb-2">
+          madunladuni98@gmail.com
+        </div>
+      </div>
+      <div className="flex flex-col gap-2 px-2 pb-2">
+        <DropdownMenuItem className="flex items-center justify-between gap-2 rounded-lg border border-gray-200 px-3 py-2 text-gray-900 hover:bg-gray-100 cursor-pointer">
+          <div className="flex items-center gap-2">
+            <User className="h-5 w-5 text-gray-500" />
+            <span>Member profile</span>
+          </div>
+          <ArrowRight className="h-4 w-4 text-gray-400" />
+        </DropdownMenuItem>
+        <DropdownMenuItem className="flex items-center justify-between gap-2 rounded-lg border border-gray-200 px-3 py-2 text-gray-900 hover:bg-gray-100 cursor-pointer">
+          <div className="flex items-center gap-2">
+            <Info className="h-5 w-5 text-gray-500" />
+            <span>Information</span>
+          </div>
+          <ArrowRight className="h-4 w-4 text-gray-400" />
+        </DropdownMenuItem>
+        <DropdownMenuItem className="flex items-center justify-between gap-2 rounded-lg border border-gray-200 px-3 py-2 text-gray-900 hover:bg-gray-100 cursor-pointer">
+          <div className="flex items-center gap-2">
+            <Bell className="h-5 w-5 text-gray-500" />
+            <span>Notification</span>
+          </div>
+          <ArrowRight className="h-4 w-4 text-gray-400" />
+        </DropdownMenuItem>
+      </div>
+      <div className="px-2 pb-3">
+        <DropdownMenuItem className="flex items-center gap-2 rounded-lg border border-gray-200 px-3 py-2 text-red-600 hover:bg-red-50 cursor-pointer font-semibold">
+          <LogOut className="h-5 w-5" />
+          <span>Logout</span>
+        </DropdownMenuItem>
+      </div>
+    </DropdownMenuContent>
+  );
+}
 
 export default function DashboardLayout({
   children,
@@ -65,7 +117,7 @@ export default function DashboardLayout({
         className={`fixed inset-y-0 left-0 z-50 bg-white border-r border-gray-200 transform transition-all duration-300 ease-in-out ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
         } lg:translate-x-0 lg:relative lg:flex lg:flex-col ${
-          sidebarCollapsed ? "w-16" : "w-64"
+          sidebarCollapsed ? "w-16" : "w-xs"
         }`}
       >
         {/* Collapsed State - Collapse Button at Top */}
@@ -77,7 +129,7 @@ export default function DashboardLayout({
               onClick={toggleCollapse}
               className="p-2 hover:bg-gray-100 rounded-lg"
             >
-              <ChevronRight className="h-4 w-4" />
+              <PanelRightOpen className="h-4 w-4" />
             </Button>
           </div>
         )}
@@ -97,28 +149,35 @@ export default function DashboardLayout({
           </div>
         )}
 
-        {/* User Profile Section */}
+        {/* Sidebar Profile Dropdown */}
         {!sidebarCollapsed && (
           <div className="px-4 py-4 border-b border-gray-100">
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <Avatar className="h-10 w-10">
-                  <AvatarImage
-                    src="/placeholder-avatar.jpg"
-                    alt="Madun Laduni"
-                  />
-                  <AvatarFallback className="bg-purple-100 text-purple-600">
-                    ML
-                  </AvatarFallback>
-                </Avatar>
-                <div className="flex items-center gap-2 flex-1">
-                  <span className="text-sm font-medium text-gray-900 truncate">
-                    Madun Laduni
-                  </span>
-                  <div className="w-2 h-2 bg-green-500 rounded-full flex-shrink-0"></div>
-                </div>
-              </div>
-
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <div className="flex items-center gap-3 cursor-pointer hover:bg-gray-100 p-2 rounded-lg transition">
+                    <Avatar className="h-10 w-10">
+                      <AvatarImage
+                        src="https://img.freepik.com/free-photo/brunette-businesswoman-posing_23-2148142767.jpg?t=st=1750967516~exp=1750971116~hmac=1152aad7739f1373796550432805aac0582884b43feea7bf08e74c602ad6231b&w=1380"
+                        alt="Madun Laduni"
+                      />
+                      <AvatarFallback className="bg-purple-100 text-purple-600">
+                        ML
+                      </AvatarFallback>
+                    </Avatar>
+                    <div className="flex flex-col flex-1">
+                      <span className="text-sm font-medium text-gray-900 truncate">
+                        Madun Laduni
+                      </span>
+                      <span className="text-xs text-gray-500 truncate">
+                        madunladuni98@gmail.com
+                      </span>
+                    </div>
+                    <div className="w-2 h-2 bg-green-500 rounded-full flex-shrink-0"></div>
+                  </div>
+                </DropdownMenuTrigger>
+                <ProfileDropdownMenu />
+              </DropdownMenu>
               {/* Collapse Button beside profile - Extended State */}
               <Button
                 variant="ghost"
@@ -126,7 +185,7 @@ export default function DashboardLayout({
                 onClick={toggleCollapse}
                 className="hidden lg:flex p-1.5 hover:bg-gray-100 rounded-lg"
               >
-                <ChevronLeft className="h-4 w-4" />
+                <PanelRightOpen className="h-4 w-4" />
               </Button>
             </div>
           </div>
@@ -136,7 +195,10 @@ export default function DashboardLayout({
         {sidebarCollapsed && (
           <div className="px-2 py-4 border-b border-gray-100 flex justify-center">
             <Avatar className="h-8 w-8">
-              <AvatarImage src="/placeholder-avatar.jpg" alt="Madun Laduni" />
+              <AvatarImage
+                src="https://img.freepik.com/free-photo/brunette-businesswoman-posing_23-2148142767.jpg?t=st=1750967516~exp=1750971116~hmac=1152aad7739f1373796550432805aac0582884b43feea7bf08e74c602ad6231b&w=1380"
+                alt="Madun Laduni"
+              />
               <AvatarFallback className="bg-purple-100 text-purple-600 text-xs">
                 ML
               </AvatarFallback>
@@ -149,7 +211,7 @@ export default function DashboardLayout({
           <div className="space-y-1">
             {sidebarItems.map((item) => (
               <div key={item.label} className="relative group">
-                <a
+                <Link
                   href={item.href}
                   className={`flex items-center gap-3 px-3 py-2.5 text-sm font-medium rounded-lg transition-colors ${
                     item.active
@@ -165,7 +227,7 @@ export default function DashboardLayout({
                   {!sidebarCollapsed && (
                     <span className="truncate">{item.label}</span>
                   )}
-                </a>
+                </Link>
 
                 {/* Tooltip for collapsed state */}
                 {sidebarCollapsed && (
@@ -183,7 +245,7 @@ export default function DashboardLayout({
           <div className="space-y-1">
             {bottomSidebarItems.map((item) => (
               <div key={item.label} className="relative group">
-                <a
+                <Link
                   href={item.href}
                   className={`flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-gray-600 rounded-lg hover:bg-gray-50 hover:text-gray-900 transition-colors ${
                     sidebarCollapsed ? "justify-center" : ""
@@ -193,7 +255,7 @@ export default function DashboardLayout({
                   {!sidebarCollapsed && (
                     <span className="truncate">{item.label}</span>
                   )}
-                </a>
+                </Link>
 
                 {/* Tooltip for collapsed state */}
                 {sidebarCollapsed && (
@@ -246,7 +308,6 @@ export default function DashboardLayout({
                   className="pl-10 w-64 bg-gray-50 border-0 focus:bg-white focus:ring-1 focus:ring-purple-500 h-9"
                 />
               </div>
-
               {/* Premium Member Badge */}
               <div className="hidden sm:flex items-center gap-1 px-3 py-1.5 bg-orange-50 text-orange-600 rounded-full text-sm font-medium whitespace-nowrap">
                 <span className="text-orange-500">✨</span>
@@ -271,7 +332,7 @@ export default function DashboardLayout({
                 <Settings className="h-4 w-4" />
               </Button>
 
-              {/* Profile Dropdown */}
+              {/* Topbar Profile Dropdown */}
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button
@@ -280,18 +341,15 @@ export default function DashboardLayout({
                   >
                     <Avatar className="h-8 w-8">
                       <AvatarImage
-                        src="/placeholder-avatar.jpg"
+                        src="https://img.freepik.com/free-photo/brunette-businesswoman-posing_23-2148142767.jpg?t=st=1750967516~exp=1750971116~hmac=1152aad7739f1373796550432805aac0582884b43feea7bf08e74c602ad6231b&w=1380"
                         alt="Profile"
                       />
                       <AvatarFallback className="text-xs">ML</AvatarFallback>
                     </Avatar>
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent className="w-56" align="end" forceMount>
-                  <DropdownMenuItem>Profile</DropdownMenuItem>
-                  <DropdownMenuItem>Settings</DropdownMenuItem>
-                  <DropdownMenuItem>Log out</DropdownMenuItem>
-                </DropdownMenuContent>
+                {/* Use the same dropdown menu as in the sidebar */}
+                <ProfileDropdownMenu />
               </DropdownMenu>
             </div>
           </div>
