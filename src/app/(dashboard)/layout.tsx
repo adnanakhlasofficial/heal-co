@@ -14,6 +14,7 @@ import {
   ChevronRight as ArrowRight,
   Bell,
   Calendar,
+  FileText,
   Headphones,
   HelpCircle,
   Home,
@@ -40,6 +41,7 @@ const sidebarItems = [
     href: "/appointment/request",
   },
   { icon: Activity, label: "RPM Entry + Tracker", href: "/rpm-entry-tracker" },
+  { icon: FileText, label: "Assigned Patients", href: "/assigned-patients" },
 ];
 
 const bottomSidebarItems = [
