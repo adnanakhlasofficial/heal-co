@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import React, { useState } from "react";
 
 type Employee = {
@@ -167,7 +168,7 @@ export default function BulkEmployeeUploadPage() {
                     />
                   </td>
                   <td className="py-3 px-4 flex items-center gap-3">
-                    <img
+                    <Image
                       src={emp.avatar}
                       alt={emp.name}
                       className="w-8 h-8 rounded-full object-cover"

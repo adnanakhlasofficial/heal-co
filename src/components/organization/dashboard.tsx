@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import React from "react";
 import {
   LineChart,
@@ -322,7 +323,13 @@ const OrganizationDashboard: React.FC = () => (
               </td>
               <td className="py-2">{a.patients}</td>
               <td className="py-2 flex items-center gap-2">
-                <img src={a.avatar} alt="" className="w-6 h-6 rounded-full" />
+                <Image
+                  width={24}
+                  height={24}
+                  src={a.avatar}
+                  alt=""
+                  className="w-6 h-6 rounded-full"
+                />
                 {a.provider}
               </td>
               <td className="py-2">

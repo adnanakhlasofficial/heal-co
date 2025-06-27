@@ -1,6 +1,7 @@
 "use client";
 import { CreatePatientGroupModal } from "@/components/organization/forms/Modal";
 import { Location, Provider, Specialty } from "@/types";
+import Image from "next/image";
 import React, { useState } from "react";
 
 const assignments = [
@@ -311,7 +312,7 @@ export default function PatientGroupPage() {
                     <td className="py-3 px-4">{a.patients}</td>
                     <td className="py-3 px-4">
                       <div className="flex items-center gap-2">
-                        <img
+                        <Image
                           src={a.provider.avatar}
                           alt={a.provider.name}
                           className="w-8 h-8 rounded-full object-cover"

@@ -27,6 +27,11 @@ import {
   Settings,
   User,
   X,
+  Clock,
+  Users,
+  DollarSign,
+  Building,
+  Upload,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -40,8 +45,26 @@ const sidebarItems = [
     label: "Appointment Request",
     href: "/appointment/request",
   },
+  {
+    icon: Clock,
+    label: "Appointment History",
+    href: "/appointment-history",
+  },
   { icon: Activity, label: "RPM Entry + Tracker", href: "/rpm-entry-tracker" },
   { icon: FileText, label: "Assigned Patients", href: "/assigned-patients" },
+  { icon: User, label: "Member Profile", href: "/member-profile" },
+  { icon: Users, label: "Patient Group", href: "/patient-group" },
+  { icon: DollarSign, label: "Pricing Tiers", href: "/pricing-tiers" },
+  {
+    icon: Building,
+    label: "Organization Dashboard",
+    href: "/organization/dashboard",
+  },
+  {
+    icon: Upload,
+    label: "Bulk Employee Upload",
+    href: "/organization/bulk-employee-upload",
+  },
 ];
 
 const bottomSidebarItems = [
@@ -216,8 +239,8 @@ export default function DashboardLayout({
                 <Link
                   href={item.href}
                   className={`flex items-center gap-3 px-3 py-2.5 text-sm font-medium rounded-lg transition-colors ${
-                    item.active
-                      ? "bg-purple-50 text-purple-700 border border-purple-200"
+                    pathname === item.href
+                      ? "bg-purple-100 text-purple-700 border-l-2 border-purple-700"
                       : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
                   } ${sidebarCollapsed ? "justify-center" : ""}`}
                 >

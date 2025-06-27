@@ -25,6 +25,7 @@ import {
   type ProviderSelectionValues,
 } from "@/schemas";
 import { type Provider, type Specialty } from "@/types";
+import Image from "next/image";
 
 interface ProviderSelectionFormProps {
   onNext: (data: ProviderSelectionValues) => void;
@@ -145,7 +146,7 @@ export default function ProviderSelectionForm({
                     <CardContent className="p-4">
                       <div className="flex flex-col items-center text-center space-y-3">
                         <div className="relative">
-                          <img
+                          <Image
                             src={provider.avatar}
                             alt={provider.name}
                             className="w-16 h-16 rounded-full object-cover"

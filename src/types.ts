@@ -1,3 +1,5 @@
+import { JSX } from "react";
+
 export interface Provider {
   id: string;
   name: string;
@@ -26,4 +28,21 @@ export interface Location {
 export interface Specialty {
   id: string;
   name: string;
+}
+
+export type FeatureKey =
+  | "priorityAppointments"
+  | "virtualConsultations"
+  | "specialistReferrals"
+  | "prescriptionDelivery"
+  | "videoVisit";
+
+export interface PricingTier {
+  name: string;
+  price: string;
+  color: string;
+  icon: JSX.Element;
+  features: {
+    [key in FeatureKey]: boolean;
+  };
 }
