@@ -236,14 +236,14 @@ const OrganizationDashboard: React.FC = () => (
             <button className="text-xs text-gray-500">Last 12 Months</button>
           </div>
         </div>
-        <ResponsiveContainer width="100%" height={250}>
+        <ResponsiveContainer width="100%" height={300}>
           <LineChart
             data={visitsData}
             margin={{ top: 20, right: 30, left: 0, bottom: 0 }}
           >
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="date" />
-            <YAxis />
+            <YAxis dataKey="value" />
             <Tooltip />
             <Legend />
             <Line
