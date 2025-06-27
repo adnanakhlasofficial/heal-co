@@ -313,6 +313,8 @@ export default function PatientGroupPage() {
                     <td className="py-3 px-4">
                       <div className="flex items-center gap-2">
                         <Image
+                          width={32}
+                          height={32}
                           src={a.provider.avatar}
                           alt={a.provider.name}
                           className="w-8 h-8 rounded-full object-cover"

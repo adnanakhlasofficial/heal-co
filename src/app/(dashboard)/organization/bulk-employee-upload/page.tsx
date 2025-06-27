@@ -169,6 +169,8 @@ export default function BulkEmployeeUploadPage() {
                   </td>
                   <td className="py-3 px-4 flex items-center gap-3">
                     <Image
+                      width={32}
+                      height={32}
                       src={emp.avatar}
                       alt={emp.name}
                       className="w-8 h-8 rounded-full object-cover"
