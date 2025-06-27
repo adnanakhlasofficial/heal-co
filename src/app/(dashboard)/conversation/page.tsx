@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { MessageCircle, Phone, Mail, Bot, User } from "lucide-react";
+import { MessageCircle, Phone, Mail, Bot, User, ArrowLeft } from "lucide-react";
 
 type ChatItemType = "AI" | "SMS" | "Call" | "Email";
 
@@ -83,12 +83,39 @@ const messages = [
 ];
 
 export default function Conversation() {
+  // 0 = list, 1 = chat (mobile only)
+  const [mobileView, setMobileView] = useState(0);
   const [input, setInput] = useState("");
 
+  // Adjust this if your topbar is fixed and has a different height
+  // const CONTAINER_HEIGHT = "h-[calc(100vh-64px)]"; // 64px for topbar
+
   return (
-    <div className="flex gap-4">
-      {/* Sidebar */}
-      <aside className="w-[320px] bg-white border-r border-gray-100 flex flex-col p-4 rounded-lg">
+    <div className={`w-full h-full flex gap-0 md:gap-4`}>
+      {/* Sidebar (Conversation List) */}
+      <aside
+        className={`
+          flex flex-col static bg-white border border-gray-100 rounded-xl
+          !h-full p-4 w-full max-w-full
+          md:w-[320px] md:max-w-[320px] md:static md:flex
+          ${mobileView === 1 ? "hidden" : "flex"}
+          fixed inset-0 z-0 md:relative md:flex
+          transition-all
+        `}
+      >
+        {/* Topbar for mobile (leave empty if your topbar is global) */}
+        <div className="flex items-center justify-between px-4 py-3 border-b border-gray-100 md:hidden">
+          <span className="font-semibold text-lg">Conversation</span>
+          <div className="flex gap-2">
+            <Button variant="ghost" size="icon">
+              <Mail className="w-5 h-5" />
+            </Button>
+            <Button variant="ghost" size="icon">
+              <User className="w-5 h-5" />
+            </Button>
+          </div>
+        </div>
+        {/* List header */}
         <div className="p-4 border-b border-gray-100">
           <h2 className="font-semibold text-lg text-gray-900">All Items</h2>
         </div>
@@ -99,6 +126,7 @@ export default function Conversation() {
               className={`flex items-center px-4 py-3 gap-3 cursor-pointer ${
                 item.active ? "bg-gray-100 rounded-lg" : ""
               }`}
+              onClick={() => setMobileView(1)}
             >
               <span>
                 {item.type === "AI" && (
@@ -135,7 +163,7 @@ export default function Conversation() {
           ))}
         </div>
         <div className="p-4">
-          <Button className="w-full bg-purple-600 hover:bg-purple-700">
+          <Button className="w-full bg-[#8C7BFA] hover:bg-[#7a68e8] text-white text-base font-medium rounded-lg py-3">
             <MessageCircle className="w-4 h-4 mr-2" />
             Start New Chat
           </Button>
@@ -143,9 +171,24 @@ export default function Conversation() {
       </aside>
 
       {/* Main Chat */}
-      <main className="flex-1 flex flex-col bg-white p-4 rounded-lg">
-        {/* Header */}
-        <div className="flex items-center gap-4 border-b border-gray-100 p-4">
+      <main
+        className={`
+          flex-1 flex static flex-col bg-white rounded-xl border border-gray-100
+          h-full
+          ${mobileView === 0 ? "hidden" : "flex"}
+          fixed inset-0 z-30 md:static md:flex
+          transition-all
+        `}
+      >
+        {/* Mobile back button and header */}
+        <div className="flex items-center gap-2 border-b border-gray-100 p-4 md:hidden">
+          <Button variant="ghost" size="icon" onClick={() => setMobileView(0)}>
+            <ArrowLeft className="w-5 h-5" />
+          </Button>
+          <span className="font-semibold text-lg">HealCo Assistant</span>
+        </div>
+        {/* Chat Header (desktop only) */}
+        <div className="hidden md:flex items-center gap-4 border-b border-gray-100 p-4">
           <Avatar>
             <AvatarImage src="/assistant.png" />
             <AvatarFallback>HA</AvatarFallback>
@@ -167,8 +210,7 @@ export default function Conversation() {
         </div>
 
         {/* Chat Body */}
-        <div className="flex-1 overflow-auto p-6 flex flex-col gap-4">
-          {/* User and Assistant Messages */}
+        <div className="flex-1 overflow-auto p-4 md:p-6 flex flex-col gap-4">
           {messages.map((msg) =>
             msg.isAssistant ? (
               <div key={msg.id} className="flex flex-col items-start">
@@ -227,7 +269,7 @@ export default function Conversation() {
                 <div
                   className={`max-w-lg rounded-lg px-4 py-3 mb-1 ${
                     msg.position === "right"
-                      ? "bg-purple-50 text-purple-900"
+                      ? "bg-[#F3F0FF] text-[#5F44E3]"
                       : "bg-gray-100 text-gray-900"
                   }`}
                 >
@@ -248,7 +290,6 @@ export default function Conversation() {
             )
           )}
         </div>
-
         {/* Chat Input */}
         <form
           className="flex items-center border-t border-gray-100 p-4 gap-3"
@@ -263,7 +304,10 @@ export default function Conversation() {
             onChange={(e) => setInput(e.target.value)}
             className="flex-1 bg-gray-50"
           />
-          <Button type="submit" className="bg-purple-600 hover:bg-purple-700">
+          <Button
+            type="submit"
+            className="bg-[#8C7BFA] hover:bg-[#7a68e8] text-white font-medium px-6 py-2 rounded-lg"
+          >
             Send
           </Button>
         </form>

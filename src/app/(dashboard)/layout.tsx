@@ -249,7 +249,9 @@ export default function DashboardLayout({
                 >
                   <item.icon
                     className={`h-5 w-5 flex-shrink-0 ${
-                      item.active ? "text-purple-600" : "text-gray-400"
+                      pathname === item.href
+                        ? "text-purple-600"
+                        : "text-gray-400"
                     }`}
                   />
                   {!sidebarCollapsed && (
