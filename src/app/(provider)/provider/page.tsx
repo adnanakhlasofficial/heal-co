@@ -327,6 +327,8 @@ export default function DoctorDashboard() {
                     {/* Patient */}
                     <td className="py-3 px-4 flex items-center gap-3">
                       <Image
+                        width={10}
+                        height={10}
                         src={a.avatar}
                         alt={a.name}
                         className="w-10 h-10 rounded-full object-cover"

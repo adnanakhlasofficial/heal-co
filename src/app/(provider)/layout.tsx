@@ -10,9 +10,9 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import {
-  Activity,
   ChevronRight as ArrowRight,
   Bell,
+  Calendar,
   Headphones,
   HelpCircle,
   Home,
@@ -23,7 +23,6 @@ import {
   PanelRightOpen,
   Search,
   Settings,
-  User,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -31,20 +30,20 @@ import { useState } from "react";
 
 // Sidebar navigation items
 const sidebarItems = [
-  { icon: Home, label: "Dashboard", href: "/member", active: true },
-  { icon: MessageCircle, label: "Conversation", href: "/member/conversation" },
-  // {
-  //   icon: Calendar,
-  //   label: "Appointment Request",
-  //   href: "/appointment/request",
-  // },
-  // { icon: Clock, label: "Appointment History", href: "/appointment-history" },
+  { icon: Home, label: "Dashboard", href: "/provider", active: true },
   {
-    icon: Activity,
-    label: "RPM Entry + Tracker",
-    href: "/member/rpm-entry-tracker",
+    icon: MessageCircle,
+    label: "Conversation",
+    href: "/provider/conversation",
   },
-  // { icon: User, label: "Member Profile", href: "/member/profile" },
+  {
+    icon: Calendar,
+    label: "Assigned Patients",
+    href: "/provider/assigned-patients",
+  },
+  // { icon: Clock, label: "Appointment History", href: "/appointment-history" },
+  // { icon: Activity, label: "RPM Entry + Tracker", href: "/rpm-entry-tracker" },
+  // { icon: User, label: "Member Profile", href: "/member-profile" },
   // { icon: Users, label: "Patient Group", href: "/organization/patient-group" },
   // {
   //   icon: DollarSign,
@@ -87,12 +86,7 @@ function ProfileDropdownMenu() {
       </div>
       <div className="flex flex-col gap-2 px-2 pb-2">
         <DropdownMenuItem className="flex items-center justify-between gap-2 rounded-lg border border-gray-200 px-3 py-2 text-gray-900 hover:bg-gray-100 cursor-pointer">
-          <Link href="/member/profile">
-            <div className="flex items-center gap-2">
-              <User className="h-5 w-5 text-gray-500" />
-              <span>Member profile</span>
-            </div>
-          </Link>
+          <Link href="/provider/profile"></Link>
           <ArrowRight className="h-4 w-4 text-gray-400" />
         </DropdownMenuItem>
         <DropdownMenuItem className="flex items-center justify-between gap-2 rounded-lg border border-gray-200 px-3 py-2 text-gray-900 hover:bg-gray-100 cursor-pointer">
