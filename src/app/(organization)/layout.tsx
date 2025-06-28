@@ -10,12 +10,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import {
-  Activity,
   ChevronRight as ArrowRight,
   Bell,
-  Building,
-  Calendar,
-  Clock,
   DollarSign,
   Headphones,
   HelpCircle,
@@ -23,7 +19,6 @@ import {
   Info,
   LogOut,
   Menu,
-  MessageCircle,
   PanelRightOpen,
   Search,
   Settings,
