@@ -162,7 +162,8 @@ export default function ChatDashboard() {
                   </span>
                 </div>
                 <div className="text-xs text-[#b0b3b9] mt-1 truncate">
-                  I’ve been trying to schedule an appointment for the past...
+                  I&apos;ve been trying to schedule an appointment for the
+                  past...
                 </div>
               </div>
             ))}
