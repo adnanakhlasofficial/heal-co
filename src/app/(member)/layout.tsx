@@ -13,6 +13,7 @@ import {
   Activity,
   ChevronRight as ArrowRight,
   Bell,
+  Calendar,
   Headphones,
   HelpCircle,
   Home,
@@ -33,11 +34,11 @@ import { useState } from "react";
 const sidebarItems = [
   { icon: Home, label: "Dashboard", href: "/member", active: true },
   { icon: MessageCircle, label: "Conversation", href: "/member/conversation" },
-  // {
-  //   icon: Calendar,
-  //   label: "Appointment Request",
-  //   href: "/appointment/request",
-  // },
+  {
+    icon: Calendar,
+    label: "Appointment Request",
+    href: "/member/appointment/request",
+  },
   // { icon: Clock, label: "Appointment History", href: "/appointment-history" },
   {
     icon: Activity,

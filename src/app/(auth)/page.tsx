@@ -76,7 +76,7 @@ export default function LoginForm() {
   const handleRoleRedirect = (role: "member" | "provider" | "organization") => {
     setTimeout(() => {
       router.push(`/${role}`);
-    }, 4000); // 4 seconds delay
+    }, 300); // 4 seconds delay
   };
 
   return (
