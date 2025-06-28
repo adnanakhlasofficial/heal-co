@@ -11,18 +11,20 @@ import {
 import { Input } from "@/components/ui/input";
 import {
   ChevronRight as ArrowRight,
+  BarChart,
   Bell,
-  Calendar,
   Headphones,
   HelpCircle,
   Home,
   Info,
+  Layers,
   LogOut,
   Menu,
   MessageCircle,
   PanelRightOpen,
   Search,
   Settings,
+  Users,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
@@ -30,36 +32,33 @@ import { useState } from "react";
 
 // Sidebar navigation items
 const sidebarItems = [
-  { icon: Home, label: "Dashboard", href: "/provider", active: true },
+  {
+    icon: Home,
+    label: "Dashboard",
+    href: "/super-admin",
+    active: true,
+  },
   {
     icon: MessageCircle,
     label: "Conversation",
-    href: "/provider/conversation",
+    href: "/super-admin/conversation",
   },
   {
-    icon: Calendar,
-    label: "Assigned Patients",
-    href: "/provider/assigned-patients",
+    icon: Users,
+    label: "Organization Management",
+    href: "/super-admin/organization-management",
   },
-  // { icon: Clock, label: "Appointment History", href: "/appointment-history" },
-  // { icon: Activity, label: "RPM Entry + Tracker", href: "/rpm-entry-tracker" },
-  // { icon: User, label: "Member Profile", href: "/member-profile" },
-  // { icon: Users, label: "Patient Group", href: "/organization/patient-group" },
-  // {
-  //   icon: DollarSign,
-  //   label: "Pricing Tiers",
-  //   href: "/organization/pricing-tiers",
-  // },
-  // {
-  //   icon: Building,
-  //   label: "Organization Dashboard",
-  //   href: "/organization/dashboard",
-  // },
-  // {
-  //   icon: Upload,
-  //   label: "Bulk Employee Upload",
-  //   href: "/organization/bulk-employee-upload",
-  // },
+  {
+    icon: Layers,
+    label: "Provider Management",
+    href: "/super-admin/provider-management",
+  },
+  {
+    icon: BarChart,
+    label: "Tier Management",
+    href: "/super-admin/tier-management",
+  },
+  // Add more items as needed
 ];
 
 const bottomSidebarItems = [
