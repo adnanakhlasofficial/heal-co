@@ -25,7 +25,7 @@ import {
   Settings,
 } from "lucide-react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 
 // Sidebar navigation items
@@ -65,10 +65,16 @@ const sidebarItems = [
 const bottomSidebarItems = [
   { icon: HelpCircle, label: "Help & center", href: "/help" },
   { icon: Headphones, label: "Support", href: "/support" },
-  { icon: LogOut, label: "Log out", href: "/logout" },
+  { icon: LogOut, label: "Log out", href: "/" },
 ];
 
 function ProfileDropdownMenu() {
+  const router = useRouter();
+  const handleLogoutRediect = () => {
+    setTimeout(() => {
+      router.push(`/`);
+    }, 1000); // 1 seconds delay
+  };
   return (
     <DropdownMenuContent
       className="w-64 p-0 rounded-xl shadow-lg border border-gray-100"
@@ -105,7 +111,10 @@ function ProfileDropdownMenu() {
         </DropdownMenuItem>
       </div>
       <div className="px-2 pb-3">
-        <DropdownMenuItem className="flex items-center gap-2 rounded-lg border border-gray-200 px-3 py-2 text-red-600 hover:bg-red-50 cursor-pointer font-semibold">
+        <DropdownMenuItem
+          onClick={handleLogoutRediect}
+          className="flex items-center gap-2 rounded-lg border border-gray-200 px-3 py-2 text-red-600 hover:bg-red-50 cursor-pointer font-semibold"
+        >
           <LogOut className="h-5 w-5" />
           <span>Logout</span>
         </DropdownMenuItem>

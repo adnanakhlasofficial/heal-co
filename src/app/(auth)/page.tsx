@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ChevronDown, Eye, EyeOff } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -69,6 +70,14 @@ export default function LoginForm() {
   const selectedCountry = countries.find(
     (country) => country.code === form.watch("countryCode")
   );
+
+  const router = useRouter();
+
+  const handleRoleRedirect = (role: "member" | "provider" | "organization") => {
+    setTimeout(() => {
+      router.push(`/${role}`);
+    }, 4000); // 4 seconds delay
+  };
 
   return (
     <section className="bg-white rounded-lg border border-gray-200 p-8 shadow-sm max-w-lg mx-auto mt-10">
@@ -264,6 +273,29 @@ export default function LoginForm() {
           )}
         </form>
       </Form>
+      <div className="flex justify-center gap-4 my-6">
+        <Button
+          type="button"
+          onClick={() => handleRoleRedirect("member")}
+          className="px-6 py-2 rounded-full bg-purple-100 text-purple-700 hover:bg-purple-200"
+        >
+          Member
+        </Button>
+        <Button
+          type="button"
+          onClick={() => handleRoleRedirect("provider")}
+          className="px-6 py-2 rounded-full bg-blue-100 text-blue-700 hover:bg-blue-200"
+        >
+          Provider
+        </Button>
+        <Button
+          type="button"
+          onClick={() => handleRoleRedirect("organization")}
+          className="px-6 py-2 rounded-full bg-green-100 text-green-700 hover:bg-green-200"
+        >
+          Organization
+        </Button>
+      </div>
     </section>
   );
 }
