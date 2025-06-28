@@ -92,8 +92,8 @@ function ProfileDropdownMenu() {
         <DropdownMenuItem className="flex items-center justify-between gap-2 rounded-lg border border-gray-200 px-3 py-2 text-gray-900 hover:bg-gray-100 cursor-pointer">
           <Link href="/organization">
             <div className="flex items-center gap-2">
-              <User className="h-5 w-5 text-gray-500" />
-              <span>Organization Profile</span>
+              <Settings className="h-5 w-5 text-gray-500" />
+              <span>Settings</span>
             </div>
           </Link>
           <ArrowRight className="h-4 w-4 text-gray-400" />
