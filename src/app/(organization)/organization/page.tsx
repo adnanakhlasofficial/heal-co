@@ -255,7 +255,7 @@ const OrganizationDashboard: React.FC = () => (
       </div>
 
       {/* Donut Chart */}
-      <div className="bg-white rounded-xl p-6 shadow flex flex-col items-center">
+      <div className="bg-white rounded-xl shadow flex flex-col items-center">
         <div className="font-semibold mb-2">Member Demographics</div>
         <div className="w-full h-40">
           <ResponsiveContainer width="100%" height="100%">
