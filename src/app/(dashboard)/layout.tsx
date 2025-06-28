@@ -1,5 +1,8 @@
 "use client";
 
+import { useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -11,10 +14,10 @@ import {
 import { Input } from "@/components/ui/input";
 import {
   Activity,
-  ChevronRight as ArrowRight,
   Bell,
   Building,
   Calendar,
+  ChevronRight as ArrowRight,
   Clock,
   DollarSign,
   Headphones,
@@ -32,10 +35,8 @@ import {
   Users,
   X,
 } from "lucide-react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useState } from "react";
 
+// Sidebar navigation items
 const sidebarItems = [
   { icon: Home, label: "Dashboard", href: "/", active: true },
   { icon: MessageCircle, label: "Conversation", href: "/conversation" },
@@ -44,13 +45,8 @@ const sidebarItems = [
     label: "Appointment Request",
     href: "/appointment/request",
   },
-  {
-    icon: Clock,
-    label: "Appointment History",
-    href: "/appointment-history",
-  },
+  { icon: Clock, label: "Appointment History", href: "/appointment-history" },
   { icon: Activity, label: "RPM Entry + Tracker", href: "/rpm-entry-tracker" },
-  // { icon: FileText, label: "Assigned Patients", href: "/assigned-patients" },
   { icon: User, label: "Member Profile", href: "/member-profile" },
   { icon: Users, label: "Patient Group", href: "/organization/patient-group" },
   {
@@ -134,21 +130,19 @@ export default function DashboardLayout({
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const pathname = usePathname();
 
-  const toggleCollapse = () => {
-    setSidebarCollapsed(!sidebarCollapsed);
-  };
+  const toggleCollapse = () => setSidebarCollapsed((prev) => !prev);
 
   return (
     <div className="flex h-screen bg-gray-50">
       {/* Sidebar */}
       <div
-        className={`fixed inset-y-0 left-0 z-50 bg-white border-r border-gray-200 transform transition-all duration-300 ease-in-out ${
-          sidebarOpen ? "translate-x-0" : "-translate-x-full"
-        } lg:translate-x-0 lg:relative lg:flex lg:flex-col ${
-          sidebarCollapsed ? "w-16" : "w-xs"
-        }`}
+        className={`fixed inset-y-0 left-0 z-50 bg-white border-r border-gray-200 transform transition-all duration-300 ease-in-out
+          ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}
+          lg:translate-x-0 lg:relative lg:flex lg:flex-col
+          ${sidebarCollapsed ? "w-16" : "w-xs"}
+        `}
       >
-        {/* Collapsed State - Collapse Button at Top */}
+        {/* Collapse Button at Top (Collapsed State) */}
         {sidebarCollapsed && (
           <div className="flex items-center justify-center p-2 border-b border-gray-100">
             <Button
@@ -157,27 +151,12 @@ export default function DashboardLayout({
               onClick={toggleCollapse}
               className="p-2 hover:bg-gray-100 rounded-lg"
             >
-              <PanelRightOpen className="h-4 w-4" />
+              <PanelRightOpen className="h-8 w-8" />
             </Button>
           </div>
         )}
 
-        {/* Extended State - Header with Logo */}
-        {!sidebarCollapsed && (
-          <div className="flex items-center justify-between border-b border-gray-100">
-            {/* Mobile Close Button */}
-            <Button
-              variant="ghost"
-              size="sm"
-              className="lg:hidden"
-              onClick={() => setSidebarOpen(false)}
-            >
-              <X className="h-4 w-4" />
-            </Button>
-          </div>
-        )}
-
-        {/* Sidebar Profile Dropdown */}
+        {/* Profile Dropdown (Extended State) */}
         {!sidebarCollapsed && (
           <div className="px-4 py-4 border-b border-gray-100">
             <div className="flex items-center justify-between">
@@ -206,15 +185,28 @@ export default function DashboardLayout({
                 </DropdownMenuTrigger>
                 <ProfileDropdownMenu />
               </DropdownMenu>
-              {/* Collapse Button beside profile - Extended State */}
+              {/* Collapse Button beside profile (Desktop) */}
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={toggleCollapse}
                 className="hidden lg:flex p-1.5 hover:bg-gray-100 rounded-lg"
               >
-                <PanelRightOpen className="h-4 w-4" />
+                <PanelRightOpen className="h-8 w-8" />
               </Button>
+              {!sidebarCollapsed && (
+                <div className="flex items-center justify-between border-b border-gray-100">
+                  {/* Mobile Close Button */}
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="lg:hidden"
+                    onClick={() => setSidebarOpen(false)}
+                  >
+                    <PanelRightOpen className="h-8 w-8" />
+                  </Button>
+                </div>
+              )}
             </div>
           </div>
         )}
@@ -258,7 +250,6 @@ export default function DashboardLayout({
                     <span className="truncate">{item.label}</span>
                   )}
                 </Link>
-
                 {/* Tooltip for collapsed state */}
                 {sidebarCollapsed && (
                   <div className="absolute left-full ml-2 top-1/2 transform -translate-y-1/2 bg-gray-900 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap z-50">
@@ -286,7 +277,6 @@ export default function DashboardLayout({
                     <span className="truncate">{item.label}</span>
                   )}
                 </Link>
-
                 {/* Tooltip for collapsed state */}
                 {sidebarCollapsed && (
                   <div className="absolute left-full ml-2 top-1/2 transform -translate-y-1/2 bg-gray-900 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap z-50">
@@ -314,6 +304,7 @@ export default function DashboardLayout({
           <div className="flex items-center justify-between h-16">
             {/* Left side - Mobile menu button + Title */}
             <div className="flex items-center gap-4">
+              {/* --- MOBILE COLLAPSE BUTTON beside profile --- */}
               <Button
                 variant="ghost"
                 size="sm"
@@ -361,26 +352,6 @@ export default function DashboardLayout({
               <Button variant="ghost" size="sm" className="p-2">
                 <Settings className="h-4 w-4" />
               </Button>
-
-              {/* Topbar Profile Dropdown */}
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button
-                    variant="ghost"
-                    className="relative h-8 w-8 rounded-full p-0"
-                  >
-                    <Avatar className="h-8 w-8">
-                      <AvatarImage
-                        src="https://img.freepik.com/free-photo/brunette-businesswoman-posing_23-2148142767.jpg?t=st=1750967516~exp=1750971116~hmac=1152aad7739f1373796550432805aac0582884b43feea7bf08e74c602ad6231b&w=1380"
-                        alt="Profile"
-                      />
-                      <AvatarFallback className="text-xs">ML</AvatarFallback>
-                    </Avatar>
-                  </Button>
-                </DropdownMenuTrigger>
-                {/* Use the same dropdown menu as in the sidebar */}
-                <ProfileDropdownMenu />
-              </DropdownMenu>
             </div>
           </div>
         </header>
