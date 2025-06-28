@@ -73,7 +73,9 @@ export default function LoginForm() {
 
   const router = useRouter();
 
-  const handleRoleRedirect = (role: "member" | "provider" | "organization") => {
+  const handleRoleRedirect = (
+    role: "member" | "provider" | "organization" | "super-admin"
+  ) => {
     setTimeout(() => {
       router.push(`/${role}`);
     }, 300); // 4 seconds delay
@@ -273,7 +275,7 @@ export default function LoginForm() {
           )}
         </form>
       </Form>
-      <div className="flex justify-center gap-4 my-6">
+      <div className="flex flex-wrap justify-center gap-4 mt-6">
         <Button
           type="button"
           onClick={() => handleRoleRedirect("member")}
@@ -294,6 +296,13 @@ export default function LoginForm() {
           className="px-6 py-2 rounded-full bg-green-100 text-green-700 hover:bg-green-200"
         >
           Organization
+        </Button>
+        <Button
+          type="button"
+          onClick={() => handleRoleRedirect("super-admin")}
+          className="px-6 py-2 rounded-full bg-red-100 text-red-700 hover:bg-red-200"
+        >
+          Super Admin
         </Button>
       </div>
     </section>
