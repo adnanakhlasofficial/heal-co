@@ -41,39 +41,23 @@ export function CreatePatientGroupModal({
   const [currentStep, setCurrentStep] = useState<ModalStep>("patient-info");
   const [formData, setFormData] = useState<FormData>({});
 
-  // Add useEffect to log step changes for debugging
+  // Reset modal state when it closes
   useEffect(() => {
-    console.log("Current step changed to:", currentStep);
-  }, [currentStep]);
+    if (!open) {
+      setCurrentStep("patient-info");
+      setFormData({});
+    }
+  }, [open]);
 
   const handlePatientInfoNext = (data: PatientGroupFormValues) => {
-    console.log("Patient info data:", data);
     setFormData((prev) => ({ ...prev, patientInfo: data }));
     setCurrentStep("provider-selection");
   };
 
   const handleProviderSelectionNext = async (data: ProviderSelectionValues) => {
-    console.log("Provider selection data:", data);
-
-    // Combine all form data properly
-    const updatedFormData = { ...formData, providerSelection: data };
-    const allData = { ...updatedFormData.patientInfo, ...data };
-
-    console.log("Complete patient group data:", allData);
-    console.log("All form data:", updatedFormData);
-
-    // Update form data state
-    setFormData(updatedFormData);
-
-    // Here you would typically make an API call to create the patient group
-    try {
-      // await createPatientGroup(allData);
-      console.log("Setting step to success...");
-      setCurrentStep("success");
-    } catch (error) {
-      console.error("Failed to create patient group:", error);
-      // Handle error appropriately
-    }
+    setFormData((prev) => ({ ...prev, providerSelection: data }));
+    // You can log or submit data here if needed
+    setCurrentStep("success");
   };
 
   const handleProviderSelectionBack = () => {
@@ -81,22 +65,16 @@ export function CreatePatientGroupModal({
   };
 
   const handleGoToAssignment = () => {
-    console.log("Going to assignment...");
     onOpenChange(false);
-    // Navigate to assignment page or perform other actions
-    // router.push('/assignments');
   };
 
   const handleCancel = () => {
-    setCurrentStep("patient-info");
-    setFormData({});
     onOpenChange(false);
   };
 
   const getModalTitle = () => {
     switch (currentStep) {
       case "patient-info":
-        return "Create new patient group";
       case "provider-selection":
         return "Create new patient group";
       case "success":
@@ -112,8 +90,6 @@ export function CreatePatientGroupModal({
         return "Complete all forms to continue!";
       case "provider-selection":
         return "Select your specialist provider";
-      case "success":
-        return "";
       default:
         return "";
     }

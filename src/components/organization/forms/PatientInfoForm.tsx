@@ -43,8 +43,8 @@ export default function PatientInfoForm({
       numberOfPatients:
         initialData?.numberOfPatients !== undefined
           ? initialData.numberOfPatients
-          : 0, // FIXED: Use 0 instead of undefined
-      priorityLevel: initialData?.priorityLevel || "", // FIXED: Use empty string instead of undefined
+          : 0,
+      priorityLevel: initialData?.priorityLevel || "",
     },
   });
 
@@ -153,11 +153,8 @@ export default function PatientInfoForm({
                       type="number"
                       placeholder="Enter the number of patients"
                       className="mt-1 h-11 border-gray-300 rounded-lg"
-                      {...field}
-                      value={field.value || ""} // FIXED: Ensure value is never undefined
-                      onChange={(e) =>
-                        field.onChange(parseInt(e.target.value) || 0)
-                      }
+                      value={field.value}
+                      onChange={(e) => field.onChange(Number(e.target.value))}
                     />
                   </FormControl>
                   <FormMessage />
