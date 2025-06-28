@@ -20,12 +20,10 @@ interface VisitData {
   date: string;
   value: number;
 }
-
 interface DemographicData {
   name: string;
   value: number;
 }
-
 interface Assignment {
   date: string;
   group: string;
@@ -46,16 +44,13 @@ const visitsData: VisitData[] = [
   { date: "May 22", value: 9 },
   { date: "May 23", value: 12 },
 ];
-
 const demographicsData: DemographicData[] = [
   { name: "18-30", value: 30 },
   { name: "31-45", value: 45 },
   { name: "46-60", value: 15 },
   { name: "61+", value: 10 },
 ];
-
 const COLORS = ["#a78bfa", "#818cf8", "#6366f1", "#c7d2fe"];
-
 const assignments: Assignment[] = [
   {
     date: "Today 10:30 AM",
@@ -104,7 +99,7 @@ const assignments: Assignment[] = [
   },
 ];
 
-// Priority badge component
+// Priority badge
 function PriorityBadge({ value }: { value: Assignment["priority"] }) {
   const color =
     value === "High"
@@ -120,7 +115,7 @@ function PriorityBadge({ value }: { value: Assignment["priority"] }) {
 }
 
 const OrganizationDashboard: React.FC = () => (
-  <div>
+  <div className="p-4 sm:p-6 md:p-8 bg-gray-50 min-h-screen">
     {/* Header */}
     <header>
       <h1 className="text-2xl font-semibold">Organization Overview</h1>
@@ -133,7 +128,6 @@ const OrganizationDashboard: React.FC = () => (
       <div className="bg-white rounded-xl p-6 shadow flex flex-col gap-2">
         <div className="flex items-center gap-2">
           <div className="bg-blue-100 p-2 rounded-full">
-            {/* icon */}
             <svg
               className="w-5 h-5 text-blue-600"
               fill="none"
@@ -164,7 +158,6 @@ const OrganizationDashboard: React.FC = () => (
       <div className="bg-white rounded-xl p-6 shadow flex flex-col gap-2">
         <div className="flex items-center gap-2">
           <div className="bg-yellow-100 p-2 rounded-full">
-            {/* icon */}
             <svg
               className="w-5 h-5 text-yellow-600"
               fill="none"
@@ -195,7 +188,6 @@ const OrganizationDashboard: React.FC = () => (
       <div className="bg-white rounded-xl p-6 shadow flex flex-col gap-2">
         <div className="flex items-center gap-2">
           <div className="bg-green-100 p-2 rounded-full">
-            {/* icon */}
             <svg
               className="w-5 h-5 text-green-600"
               fill="none"
@@ -227,8 +219,8 @@ const OrganizationDashboard: React.FC = () => (
     {/* Charts */}
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
       {/* Line Chart */}
-      <div className="bg-white rounded-xl p-6 shadow col-span-2">
-        <div className="flex justify-between items-center mb-2">
+      <div className="bg-white rounded-xl p-6 shadow col-span-1 md:col-span-2">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-2 gap-2">
           <div className="font-semibold">Monthly Visits Trend</div>
           <div className="space-x-2">
             <button className="text-xs bg-gray-200 rounded px-2 py-1">
@@ -237,54 +229,58 @@ const OrganizationDashboard: React.FC = () => (
             <button className="text-xs text-gray-500">Last 12 Months</button>
           </div>
         </div>
-        <ResponsiveContainer width="100%" height={300}>
-          <LineChart
-            data={visitsData}
-            margin={{ top: 20, right: 30, left: 0, bottom: 0 }}
-          >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="date" />
-            <YAxis dataKey="value" />
-            <Tooltip />
-            <Legend />
-            <Line
-              type="monotone"
-              dataKey="value"
-              stroke="#8b5cf6"
-              strokeWidth={3}
-              dot={true}
-              connectNulls={true}
-              activeDot={{ r: 8 }}
-            />
-          </LineChart>
-        </ResponsiveContainer>
+        <div className="w-full h-64">
+          <ResponsiveContainer width="100%" height="100%">
+            <LineChart
+              data={visitsData}
+              margin={{ top: 20, right: 30, left: 0, bottom: 0 }}
+            >
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="date" />
+              <YAxis dataKey="value" />
+              <Tooltip />
+              <Legend />
+              <Line
+                type="monotone"
+                dataKey="value"
+                stroke="#8b5cf6"
+                strokeWidth={3}
+                dot={true}
+                connectNulls={true}
+                activeDot={{ r: 8 }}
+              />
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
       </div>
 
       {/* Donut Chart */}
       <div className="bg-white rounded-xl p-6 shadow flex flex-col items-center">
         <div className="font-semibold mb-2">Member Demographics</div>
-        <ResponsiveContainer width="100%" height={140}>
-          <PieChart>
-            <Pie
-              data={demographicsData}
-              dataKey="value"
-              nameKey="name"
-              cx="50%"
-              cy="50%"
-              innerRadius={32}
-              outerRadius={48}
-              fill="#8884d8"
-              paddingAngle={3}
-              label
-            >
-              {demographicsData.map((entry, index) => (
-                <Cell key={index} fill={COLORS[index % COLORS.length]} />
-              ))}
-            </Pie>
-            <Legend layout="vertical" align="right" verticalAlign="middle" />
-          </PieChart>
-        </ResponsiveContainer>
-        <div className="flex justify-between w-full mt-2 text-xs text-gray-500">
+        <div className="w-full h-40">
+          <ResponsiveContainer width="100%" height="100%">
+            <PieChart>
+              <Pie
+                data={demographicsData}
+                dataKey="value"
+                nameKey="name"
+                cx="50%"
+                cy="50%"
+                innerRadius={32}
+                outerRadius={48}
+                fill="#8884d8"
+                paddingAngle={3}
+                label
+              >
+                {demographicsData.map((entry, index) => (
+                  <Cell key={index} fill={COLORS[index % COLORS.length]} />
+                ))}
+              </Pie>
+              <Legend layout="vertical" align="right" verticalAlign="middle" />
+            </PieChart>
+          </ResponsiveContainer>
+        </div>
+        <div className="flex flex-col sm:flex-row justify-between w-full mt-2 text-xs text-gray-500 gap-2">
           <span>
             Average Age <span className="font-bold text-gray-900">42</span>
           </span>
@@ -296,20 +292,20 @@ const OrganizationDashboard: React.FC = () => (
     </div>
 
     {/* Recent Assignments Table */}
-    <div className="bg-white rounded-xl p-6 shadow mt-8">
-      <div className="flex justify-between items-center mb-4">
+    <div className="bg-white rounded-xl p-4 sm:p-6 shadow mt-8 overflow-x-auto">
+      <div className="flex flex-col sm:flex-row justify-between items-center mb-4 gap-2">
         <div className="font-semibold">Recent Assignments</div>
         <button className="text-xs text-blue-600">View All</button>
       </div>
-      <table className="w-full text-sm">
+      <table className="min-w-full text-sm">
         <thead>
           <tr className="text-gray-400 text-left">
-            <th className="py-2">Date</th>
-            <th className="py-2">Patient Group</th>
-            <th className="py-2">No. Of Patients</th>
-            <th className="py-2">Assigned Provider</th>
-            <th className="py-2">Priority</th>
-            <th className="py-2"></th>
+            <th className="py-2 min-w-[120px]">Date</th>
+            <th className="py-2 min-w-[170px]">Patient Group</th>
+            <th className="py-2 min-w-[120px]">No. Of Patients</th>
+            <th className="py-2 min-w-[180px]">Assigned Provider</th>
+            <th className="py-2 min-w-[90px]">Priority</th>
+            <th className="py-2 min-w-[100px]"></th>
           </tr>
         </thead>
         <tbody>

@@ -62,7 +62,7 @@ const NewReading: React.FC = () => {
   };
 
   return (
-    <Card className="w-1/4 p-6 border-0">
+    <Card className="w-full lg:w-1/4 p-6 border-0">
       <Header
         title="Add new reading"
         description="Enter your latest health metrics"
