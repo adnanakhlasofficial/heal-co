@@ -24,6 +24,7 @@ import {
   PanelRightOpen,
   Search,
   Settings,
+  User,
   Users,
 } from "lucide-react";
 import Link from "next/link";
@@ -91,7 +92,10 @@ function ProfileDropdownMenu() {
       </div>
       <div className="flex flex-col gap-2 px-2 pb-2">
         <DropdownMenuItem className="flex items-center justify-between gap-2 rounded-lg border border-gray-200 px-3 py-2 text-gray-900 hover:bg-gray-100 cursor-pointer">
-          <Link href="/provider/profile"></Link>
+          <Link href="/super-admin">
+            <User className="h-5 w-5 text-gray-500" />
+            <span>Profile</span>
+          </Link>
           <ArrowRight className="h-4 w-4 text-gray-400" />
         </DropdownMenuItem>
         <DropdownMenuItem className="flex items-center justify-between gap-2 rounded-lg border border-gray-200 px-3 py-2 text-gray-900 hover:bg-gray-100 cursor-pointer">
