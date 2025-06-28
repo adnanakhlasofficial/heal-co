@@ -1,309 +1,326 @@
 "use client";
-import { useState } from "react";
-import { Eye, Upload } from "lucide-react";
-import Image from "next/image";
 
-const defaultLogo =
-  "https://pplx-res.cloudinary.com/image/private/user_uploads/67161697/9ab5077f-a3ab-41eb-809a-dd7441e5b45d/image.jpg";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Switch } from "@/components/ui/switch";
+import { Eye, EyeOff } from "lucide-react";
 
 const brandColors = [
-  "#C800FF",
-  "#00E1C3",
-  "#FF3A3A",
-  "#FFB800",
-  "#FF6B00",
-  "#0085FF",
-  "conic-gradient(from 180deg at 50% 50%, #FF3A3A 0deg, #00E1C3 360deg)",
+  "#A259FF", // purple
+  "#10B981", // green
+  "#EF4444", // red
+  "#F59E0B", // orange
+  "#3B82F6", // blue
+  "#EC4899", // pink
+  "linear-gradient(90deg,#A259FF 0%,#F59E0B 100%)", // rainbow
 ];
 
-export default function BrandSettingsPage() {
-  const [logo] = useState<string>(defaultLogo);
-  const [color, setColor] = useState<string>("#C800FF");
-  const [buttonActive, setButtonActive] = useState<boolean>(true);
-  const [features, setFeatures] = useState({
-    priority: true,
-    virtual: true,
-    referrals: true,
-    delivery: false,
-    video: false,
-  });
-  const [webhookUrl, setWebhookUrl] = useState<string>("");
-  const [secretKey, setSecretKey] = useState<string>("");
-  const [events, setEvents] = useState({
-    appointment: false,
-    patient: false,
-    billing: false,
-  });
+const defaultToggles = {
+  priority: true,
+  virtual: true,
+  specialist: true,
+  delivery: false,
+  video: false,
+};
+
+const defaultWebhookEvents = {
+  appointment: false,
+  registration: false,
+  billing: false,
+};
+
+export default function CatalogHealthSettings() {
+  const [selectedColor, setSelectedColor] = useState("#A259FF");
+  const [showSecret, setShowSecret] = useState(false);
+  const [featureToggles, setFeatureToggles] = useState(defaultToggles);
+  const [webhookEvents, setWebhookEvents] = useState(defaultWebhookEvents);
+  const [webhookUrl, setWebhookUrl] = useState("");
+  const [secretKey, setSecretKey] = useState("");
 
   return (
-    <div className="bg-gray-50">
+    <div>
       <div className="space-y-6">
-        {/* Top Section - Two Cards Side by Side */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Left Card - Brand/Logo/Color */}
-          <div className="bg-white rounded-2xl p-6 shadow-sm">
-            {/* Logo Section */}
-            <div className="flex items-center gap-4 mb-6">
-              <Image
-                src={logo}
-                width={56}
-                height={56}
-                alt="Logo"
-                className="w-14 h-14 rounded-full border border-gray-200"
-              />
-              <div className="flex-1">
-                <div className="font-semibold text-lg text-gray-900">
-                  Catalog Health
+        <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
+          {/* Left: Brand and Color */}
+          <div className="md:col-span-2 h-full">
+            <div className="bg-white rounded-2xl shadow-sm p-8 mb-6 h-full">
+              <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center gap-4">
+                  <div className="w-14 h-14 rounded-full bg-[#f4f2ff] flex items-center justify-center">
+                    <span className="text-4xl font-bold text-[#A259FF]">C</span>
+                  </div>
+                  <div>
+                    <div className="font-semibold text-lg text-gray-900">
+                      Catalog Health
+                    </div>
+                    <div className="text-xs text-gray-500">
+                      PNG, JPEG under 10MB
+                    </div>
+                  </div>
                 </div>
-                <div className="text-sm text-gray-500">
-                  PNG, JPEG under 10MB
-                </div>
+                <Button
+                  variant="outline"
+                  className="rounded-full px-5 py-2 font-medium border border-gray-200"
+                >
+                  Upload new logo
+                </Button>
               </div>
-              <button className="px-4 py-2 border border-gray-200 rounded-lg text-sm font-medium flex items-center gap-2 hover:bg-gray-50">
-                <Upload className="w-4 h-4" />
-                Upload new logo
-              </button>
-            </div>
-
-            {/* Brand Color Section */}
-            <div>
-              <div className="font-semibold text-lg mb-2">Brand Color</div>
-              <div className="text-sm text-gray-500 mb-4">
+              <div className="mb-2 font-semibold text-base text-gray-900">
+                Brand Color
+              </div>
+              <div className="text-sm text-gray-500 mb-3">
                 Select a primary color for your branding.
               </div>
-
-              {/* Color Palette */}
-              <div className="flex items-center gap-3 mb-6">
-                {brandColors.map((c, i) =>
-                  c.startsWith("conic-gradient") ? (
+              <div className="flex items-center gap-4 mb-4">
+                {brandColors.map((color) =>
+                  color.startsWith("linear") ? (
                     <button
-                      key={i}
-                      className={`w-8 h-8 rounded-full border-2 cursor-pointer transition-all ${
-                        color === "#C800FF"
-                          ? "border-purple-500 scale-110"
-                          : "border-gray-200"
+                      key={color}
+                      className={`w-8 h-8 rounded-full border-2 flex items-center justify-center ${
+                        selectedColor === color
+                          ? "border-[#A259FF]"
+                          : "border-transparent"
                       }`}
                       style={{
-                        background:
-                          "conic-gradient(from 180deg at 50% 50%, #FF3A3A 0deg, #00E1C3 360deg)",
+                        background: color,
                       }}
-                      onClick={() => setColor("#C800FF")}
-                    />
+                      onClick={() => setSelectedColor(color)}
+                    >
+                      {selectedColor === color && (
+                        <span className="block w-3 h-3 rounded-full bg-white" />
+                      )}
+                    </button>
                   ) : (
                     <button
-                      key={i}
-                      className={`w-8 h-8 rounded-full border-2 cursor-pointer transition-all ${
-                        color === c
-                          ? "border-purple-500 scale-110"
-                          : "border-gray-200"
+                      key={color}
+                      className={`w-8 h-8 rounded-full border-2 ${
+                        selectedColor === color
+                          ? "border-[#A259FF]"
+                          : "border-transparent"
                       }`}
-                      style={{ background: c }}
-                      onClick={() => setColor(c)}
+                      style={{ background: color }}
+                      onClick={() => setSelectedColor(color)}
                     />
                   )
                 )}
               </div>
-
-              {/* Preview Section */}
-              <div className="flex items-center gap-6">
-                <div>
-                  <div className="text-sm text-gray-500 mb-2">Preview</div>
-                  <button
-                    className="px-6 py-2 rounded-full font-semibold text-white text-sm"
-                    style={{ background: color }}
-                  >
-                    Button
-                  </button>
-                </div>
-                <div className="flex items-center gap-3">
-                  <span className="text-sm text-gray-500">Button</span>
-                  <label className="relative inline-flex items-center cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={buttonActive}
-                      onChange={() => setButtonActive(!buttonActive)}
-                      className="sr-only peer"
-                    />
-                    <div
-                      className={`w-11 h-6 rounded-full transition-colors ${
-                        buttonActive ? "bg-purple-600" : "bg-gray-200"
-                      }`}
-                    >
-                      <div
-                        className={`w-5 h-5 bg-white rounded-full shadow transition-transform duration-200 ${
-                          buttonActive ? "translate-x-5" : "translate-x-0.5"
-                        } mt-0.5`}
-                      />
-                    </div>
-                  </label>
-                </div>
+              <div className="mb-2 font-medium text-sm text-gray-900">
+                Preview
+              </div>
+              <div className="flex items-center gap-3">
+                <Button
+                  style={{
+                    background: selectedColor.startsWith("linear")
+                      ? undefined
+                      : selectedColor,
+                    backgroundImage: selectedColor.startsWith("linear")
+                      ? selectedColor
+                      : undefined,
+                  }}
+                  className="text-white font-semibold px-6"
+                >
+                  Button
+                </Button>
+                <Switch checked />
               </div>
             </div>
           </div>
-
-          {/* Right Card - Membership/Features */}
-          <div className="bg-white rounded-2xl p-6 shadow-sm">
-            {/* Membership Header */}
-            <div className="flex items-center justify-between mb-6">
-              <div className="flex items-center gap-2">
-                <div className="text-purple-600">
+          {/* Right: Feature Toggle */}
+          <div>
+            <div className="bg-white rounded-2xl shadow-sm p-8 h-full flex flex-col">
+              <div className="flex items-center gap-2 mb-3">
+                <span className="text-[#A259FF]">
                   <svg
-                    width="20"
-                    height="20"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
+                    width={18}
+                    height={18}
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                    viewBox="0 0 24 24"
                   >
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    <path d="M12 17.75L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
                   </svg>
-                </div>
-                <span className="font-semibold text-purple-700">
+                </span>
+                <span className="font-semibold text-[#A259FF]">
                   Standard member
                 </span>
               </div>
-              <div className="bg-purple-50 text-purple-700 px-3 py-1 rounded-full text-sm font-medium">
-                $39 <span className="text-gray-400">/month</span>
+              <div className="mb-6">
+                <span className="bg-gray-100 px-3 py-1 rounded-full text-xs text-gray-700 font-medium">
+                  $39/month
+                </span>
               </div>
-            </div>
-
-            {/* Feature Toggle Section */}
-            <div>
-              <div className="font-semibold text-lg mb-4">Feature Toggle</div>
-              <div className="space-y-4">
-                {[
-                  { label: "Priority appointments", key: "priority" },
-                  { label: "24/7 virtual consultations", key: "virtual" },
-                  { label: "Specialist referrals", key: "referrals" },
-                  { label: "Prescription delivery", key: "delivery" },
-                  { label: "Video Visit", key: "video" },
-                ].map((feature) => (
-                  <div
-                    key={feature.key}
-                    className="flex items-center justify-between"
-                  >
-                    <span className="text-gray-900">{feature.label}</span>
-                    <label className="relative inline-flex items-center cursor-pointer">
-                      <input
-                        type="checkbox"
-                        checked={features[feature.key as keyof typeof features]}
-                        onChange={() =>
-                          setFeatures((prev) => ({
-                            ...prev,
-                            [feature.key]:
-                              !prev[feature.key as keyof typeof features],
-                          }))
-                        }
-                        className="sr-only peer"
-                      />
-                      <div
-                        className={`w-11 h-6 rounded-full transition-colors ${
-                          features[feature.key as keyof typeof features]
-                            ? "bg-emerald-500"
-                            : "bg-gray-200"
-                        }`}
-                      >
-                        <div
-                          className={`w-5 h-5 bg-white rounded-full shadow transition-transform duration-200 ${
-                            features[feature.key as keyof typeof features]
-                              ? "translate-x-5"
-                              : "translate-x-0.5"
-                          } mt-0.5`}
-                        />
-                      </div>
-                    </label>
-                  </div>
-                ))}
+              <div className="font-semibold text-base text-gray-900 mb-4">
+                Feature Toggle
+              </div>
+              <div className="flex flex-col gap-5">
+                <div className="flex items-center justify-between">
+                  <span className="text-gray-800 text-sm">
+                    Priority appointments
+                  </span>
+                  <Switch
+                    checked={featureToggles.priority}
+                    onCheckedChange={() =>
+                      setFeatureToggles((ft) => ({
+                        ...ft,
+                        priority: !ft.priority,
+                      }))
+                    }
+                  />
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-gray-800 text-sm">
+                    24/7 virtual consultations
+                  </span>
+                  <Switch
+                    checked={featureToggles.virtual}
+                    onCheckedChange={() =>
+                      setFeatureToggles((ft) => ({
+                        ...ft,
+                        virtual: !ft.virtual,
+                      }))
+                    }
+                  />
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-gray-800 text-sm">
+                    Specialist referrals
+                  </span>
+                  <Switch
+                    checked={featureToggles.specialist}
+                    onCheckedChange={() =>
+                      setFeatureToggles((ft) => ({
+                        ...ft,
+                        specialist: !ft.specialist,
+                      }))
+                    }
+                  />
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-gray-800 text-sm">
+                    Prescription delivery
+                  </span>
+                  <Switch
+                    checked={featureToggles.delivery}
+                    onCheckedChange={() =>
+                      setFeatureToggles((ft) => ({
+                        ...ft,
+                        delivery: !ft.delivery,
+                      }))
+                    }
+                  />
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-gray-800 text-sm">Video Visit</span>
+                  <Switch
+                    checked={featureToggles.video}
+                    onCheckedChange={() =>
+                      setFeatureToggles((ft) => ({ ...ft, video: !ft.video }))
+                    }
+                  />
+                </div>
               </div>
             </div>
           </div>
         </div>
-
-        {/* Bottom Section - Webhook Integration */}
-        <div className="bg-white rounded-2xl p-6 shadow-sm">
-          <div className="font-semibold text-lg mb-2">Webhook Integration</div>
+        {/* Webhook Integration */}
+        <div className="bg-white rounded-2xl shadow-sm p-8 h-full">
+          <div className="font-semibold text-base text-gray-900 mb-2">
+            Webhook Integration
+          </div>
           <div className="text-sm text-gray-500 mb-6">
             Configure webhooks to integrate with your existing systems.
           </div>
-
-          {/* URL and Secret Key Inputs */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Webhook URL
-              </label>
-              <input
-                type="text"
-                placeholder="https://your-api-endpoint.com/webhook"
-                value={webhookUrl}
-                onChange={(e) => setWebhookUrl(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-              />
-            </div>
+          <div className="mb-5">
+            <label className="block text-sm text-gray-700 font-medium mb-1">
+              Webhook URL
+            </label>
+            <Input
+              placeholder="https://your-api-endpoint.com/webhook"
+              value={webhookUrl}
+              onChange={(e) => setWebhookUrl(e.target.value)}
+              className="bg-[#fafbfc] border border-gray-200"
+            />
+          </div>
+          <div className="mb-5">
+            <label className="block text-sm text-gray-700 font-medium mb-1">
+              Secret Key
+            </label>
             <div className="relative">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Secret Key
-              </label>
-              <input
-                type="password"
+              <Input
                 placeholder="https://your-api-endpoint.com/webhook"
+                type={showSecret ? "text" : "password"}
                 value={secretKey}
                 onChange={(e) => setSecretKey(e.target.value)}
-                className="w-full px-3 py-2 pr-10 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                className="bg-[#fafbfc] border border-gray-200 pr-10"
               />
-              <Eye className="w-4 h-4 absolute right-3 top-9 text-gray-400" />
+              <button
+                type="button"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"
+                onClick={() => setShowSecret((s) => !s)}
+                tabIndex={-1}
+              >
+                {showSecret ? (
+                  <EyeOff className="w-5 h-5" />
+                ) : (
+                  <Eye className="w-5 h-5" />
+                )}
+              </button>
             </div>
           </div>
-
-          {/* Events to Send */}
-          <div className="mb-6">
-            <div className="text-sm font-medium text-gray-700 mb-3">
+          <div className="mb-5">
+            <div className="block text-sm text-gray-700 font-medium mb-2">
               Events to Send
             </div>
-            <div className="space-y-3">
-              <label className="flex items-center gap-3">
+            <div className="flex flex-col gap-2">
+              <label className="inline-flex items-center gap-2 text-gray-700 text-sm">
                 <input
                   type="checkbox"
-                  checked={events.appointment}
+                  checked={webhookEvents.appointment}
                   onChange={() =>
-                    setEvents((prev) => ({
-                      ...prev,
-                      appointment: !prev.appointment,
+                    setWebhookEvents((e) => ({
+                      ...e,
+                      appointment: !e.appointment,
                     }))
                   }
-                  className="w-4 h-4 text-purple-600 border-gray-300 rounded focus:ring-purple-500"
+                  className="accent-[#A259FF] w-4 h-4 rounded"
                 />
-                <span className="text-gray-900">
-                  Appointment Created/Updated
-                </span>
+                Appointment Created/Updated
               </label>
-              <label className="flex items-center gap-3">
+              <label className="inline-flex items-center gap-2 text-gray-700 text-sm">
                 <input
                   type="checkbox"
-                  checked={events.patient}
+                  checked={webhookEvents.registration}
                   onChange={() =>
-                    setEvents((prev) => ({ ...prev, patient: !prev.patient }))
+                    setWebhookEvents((e) => ({
+                      ...e,
+                      registration: !e.registration,
+                    }))
                   }
-                  className="w-4 h-4 text-purple-600 border-gray-300 rounded focus:ring-purple-500"
+                  className="accent-[#A259FF] w-4 h-4 rounded"
                 />
-                <span className="text-gray-900">Patient Registration</span>
+                Patient Registration
               </label>
-              <label className="flex items-center gap-3">
+              <label className="inline-flex items-center gap-2 text-gray-700 text-sm">
                 <input
                   type="checkbox"
-                  checked={events.billing}
+                  checked={webhookEvents.billing}
                   onChange={() =>
-                    setEvents((prev) => ({ ...prev, billing: !prev.billing }))
+                    setWebhookEvents((e) => ({ ...e, billing: !e.billing }))
                   }
-                  className="w-4 h-4 text-purple-600 border-gray-300 rounded focus:ring-purple-500"
+                  className="accent-[#A259FF] w-4 h-4 rounded"
                 />
-                <span className="text-gray-900">Billing Events</span>
+                Billing Events
               </label>
             </div>
           </div>
-
-          {/* Test Button */}
-          <button className="px-6 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors">
+          <Button
+            variant="outline"
+            className="rounded-lg px-6 py-2 font-medium border border-gray-200"
+          >
             Test Webhooks
-          </button>
+          </Button>
         </div>
       </div>
     </div>
