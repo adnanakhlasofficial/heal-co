@@ -122,7 +122,7 @@ export default function DoctorDashboard() {
         </div>
 
         {/* Top cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 mb-6">
           {/* Today's Appointments */}
           <div className="bg-white rounded-xl shadow p-5 flex flex-col gap-2">
             <div className="flex items-center justify-between">
