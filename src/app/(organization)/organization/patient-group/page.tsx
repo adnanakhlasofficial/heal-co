@@ -317,6 +317,7 @@ export default function PatientGroupPage() {
                           height={32}
                           src={a.provider.avatar}
                           alt={a.provider.name}
+                          unoptimized
                           className="w-8 h-8 rounded-full object-cover"
                         />
                         <span className="font-medium text-gray-900">
