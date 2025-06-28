@@ -18,7 +18,7 @@ export default function Home() {
       className="
         grid grid-cols-1 gap-4 
         md:grid-cols-2 md:gap-6 
-        lg:grid-cols-3 lg:gap-6
+        xl:grid-cols-3 lg:gap-6
         
       "
     >
@@ -28,7 +28,7 @@ export default function Home() {
       </div>
 
       {/* RPMEntry: right column on desktop */}
-      <div className="col-span-1">
+      <div className="col-span-1 md:col-span-2 xl:col-span-1">
         <RPMEntry />
       </div>
 
@@ -53,7 +53,7 @@ export default function Home() {
       </div>
 
       {/* RecentConversation: right column on desktop, full width on mobile/tablet */}
-      <div className="col-span-1 md:col-span-2 lg:col-span-1 lg:row-span-2 *:h-full">
+      <div className="col-span-1 md:col-span-2 xl:col-span-1 xl:row-span-2 *:h-full">
         <RecentConversation />
       </div>
 

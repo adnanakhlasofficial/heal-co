@@ -327,7 +327,7 @@ const HealthMetricsTimeline: React.FC = () => {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-sm p-6 w-full lg:w-3/4 overflow-x-scroll">
+    <div className="bg-white rounded-lg shadow-sm p-6 w-full xl:w-3/4 overflow-x-scroll">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
         <h2 className="text-xl font-semibold text-gray-900 mb-4 sm:mb-0">

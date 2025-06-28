@@ -115,7 +115,7 @@ function PriorityBadge({ value }: { value: Assignment["priority"] }) {
 }
 
 const OrganizationDashboard: React.FC = () => (
-  <div className="p-4 sm:p-6 md:p-8 bg-gray-50 min-h-screen">
+  <div className="bg-gray-50">
     {/* Header */}
     <header>
       <h1 className="text-2xl font-semibold">Organization Overview</h1>
@@ -123,7 +123,7 @@ const OrganizationDashboard: React.FC = () => (
     </header>
 
     {/* Stats Cards */}
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
       {/* Active Members */}
       <div className="bg-white rounded-xl p-6 shadow flex flex-col gap-2">
         <div className="flex items-center gap-2">
@@ -217,9 +217,9 @@ const OrganizationDashboard: React.FC = () => (
     </div>
 
     {/* Charts */}
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+    <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 mt-8">
       {/* Line Chart */}
-      <div className="bg-white rounded-xl p-6 shadow col-span-1 md:col-span-2">
+      <div className="bg-white rounded-xl p-6 shadow col-span-1 xl:col-span-2">
         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-2 gap-2">
           <div className="font-semibold">Monthly Visits Trend</div>
           <div className="space-x-2">

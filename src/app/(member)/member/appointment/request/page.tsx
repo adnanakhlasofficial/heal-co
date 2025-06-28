@@ -163,7 +163,7 @@ export default function Appointment() {
           description="Fill out the form below to request an appointment with a healthcare provider."
         />
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
           {/* Left Column - Form */}
           <div className="space-y-6 bg-gray-100/60 rounded-xl px-6 py-4">
             {/* Doctor Specialty Category */}

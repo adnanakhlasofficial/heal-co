@@ -274,7 +274,7 @@ export default function SubscriptionTierManagement() {
         </div>
 
         {/* Tier Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 lg:gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-4 lg:gap-6 mb-8">
           {subscriptionTiers.map((tier) => (
             <div
               key={tier.id}

@@ -109,7 +109,7 @@ export default function AppointmentHistory() {
             {appointments.map((a, i) => (
               <tr
                 key={i}
-                className="border-b last:border-b-0 hover:bg-gray-50 transition"
+                className="border-b last:border-b-0 hover:bg-gray-50 transition *:text-nowrap"
               >
                 {/* Patient */}
                 <td className="py-3 px-4 flex items-center gap-3">

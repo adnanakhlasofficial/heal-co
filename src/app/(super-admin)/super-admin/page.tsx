@@ -219,7 +219,7 @@ export default function DashboardPage() {
         </div>
 
         {/* Growth Trends + Pie Chart */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-6">
+        <div className="grid grid-cols-1 xl:grid-cols-3 gap-4 mb-6">
           {/* Line Chart */}
           <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 col-span-2">
             <div className="flex items-center gap-3 mb-2">
@@ -305,7 +305,7 @@ export default function DashboardPage() {
         </div>
 
         {/* Recent Orgs + Organization Distribution */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 mb-6">
           {/* Recent Organizations */}
           <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
             <div className="flex items-center justify-between mb-2">

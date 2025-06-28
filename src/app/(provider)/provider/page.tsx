@@ -112,7 +112,7 @@ const appointments: Appointment[] = [
 
 export default function DoctorDashboard() {
   return (
-    <div className="bg-white flex flex-col items-center">
+    <div className="flex flex-col items-center">
       <div className="w-full">
         <h1 className="text-2xl font-semibold text-gray-900 mb-1">
           Welcome back, Dr. Chen
@@ -203,7 +203,7 @@ export default function DoctorDashboard() {
         </div>
 
         {/* Middle Section */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+        <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 mb-6">
           {/* Recent Activity with Recharts */}
           <div className="md:col-span-2 bg-white rounded-xl shadow p-5 flex flex-col">
             <div className="flex items-center justify-between mb-4">
@@ -221,7 +221,7 @@ export default function DoctorDashboard() {
               </div>
             </div>
             {/* Recharts LineChart */}
-            <div className="w-full h-40 mb-2">
+            <div className="w-full min-h-60 mb-2">
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart
                   data={chartData}
@@ -323,7 +323,10 @@ export default function DoctorDashboard() {
               </thead>
               <tbody>
                 {appointments.map((a) => (
-                  <tr key={a.name} className="border-b last:border-b-0">
+                  <tr
+                    key={a.name}
+                    className="border-b last:border-b-0 *:text-nowrap"
+                  >
                     {/* Patient */}
                     <td className="py-3 px-4 flex items-center gap-3">
                       <Image

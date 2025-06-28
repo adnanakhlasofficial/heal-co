@@ -178,7 +178,7 @@ export default function ProviderManagement() {
         {/* Responsive Table */}
         <div className="bg-white rounded-xl shadow border border-gray-100 overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-100">
-            <thead className="bg-gray-50 border-b border-gray-100">
+            <thead className="border-b border-gray-100">
               <tr>
                 <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase min-w-[150px]">
                   Provider

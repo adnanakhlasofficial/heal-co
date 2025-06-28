@@ -105,9 +105,9 @@ export default function ChatDashboard() {
         <aside
           className={`
     flex-shrink-0 bg-white border-r rounded-xl border-[#ececec] flex flex-col
-    w-full lg:max-w-[340px] h-full
+    w-full xl:max-w-[340px] h-full
     ${mobileView === "chat" ? "hidden" : "flex"}
-    lg:flex
+    xl:flex
   `}
           style={{ minHeight: "100%" }}
         >
@@ -180,11 +180,11 @@ export default function ChatDashboard() {
           className={`
             flex-1 flex flex-col bg-white rounded-xl
             ${mobileView === "list" ? "hidden" : "flex"}
-            lg:flex
+            xl:flex
           `}
         >
           {/* Mobile Back Button */}
-          <div className="lg:hidden flex items-center gap-2 px-4 py-4 border-b border-[#ececec]">
+          <div className="xl:hidden flex items-center gap-2 px-4 py-4 border-b border-[#ececec]">
             <button
               onClick={() => setMobileView("list")}
               className="p-2 rounded-full hover:bg-[#f5f5f7] border border-[#ececec]"
@@ -234,7 +234,7 @@ export default function ChatDashboard() {
             </div>
           </div>
           {/* Desktop Header */}
-          <div className="hidden lg:flex items-center justify-between border-b border-[#ececec] px-8 py-5">
+          <div className="hidden xl:flex items-center justify-between border-b border-[#ececec] px-8 py-5">
             <div>
               <div className="text-lg font-semibold text-[#23272f]">
                 {selected.title}
@@ -277,7 +277,7 @@ export default function ChatDashboard() {
             </div>
           </div>
           {/* Summary */}
-          <div className="hidden lg:block px-8 pt-6 pb-3 border-b border-[#ececec]">
+          <div className="hidden xl:block px-8 pt-6 pb-3 border-b border-[#ececec]">
             <div className="font-semibold text-sm mb-2 text-[#23272f]">
               Summary
             </div>

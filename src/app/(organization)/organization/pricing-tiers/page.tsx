@@ -37,7 +37,7 @@ export default function PricingTiersPage() {
       <p className="text-gray-500 mb-6 text-sm sm:text-base">
         Select below pricing tier to make changes.
       </p>
-      <div className="flex flex-col sm:flex-row gap-4 mb-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 mb-8">
         {PricingTiers.map((tier, idx) => (
           <PricingCard
             key={tier.name}
