@@ -1,8 +1,5 @@
 "use client";
 
-import { useState } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -14,10 +11,10 @@ import {
 import { Input } from "@/components/ui/input";
 import {
   Activity,
+  ChevronRight as ArrowRight,
   Bell,
   Building,
   Calendar,
-  ChevronRight as ArrowRight,
   Clock,
   DollarSign,
   Headphones,
@@ -33,8 +30,10 @@ import {
   Upload,
   User,
   Users,
-  X,
 } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
 
 // Sidebar navigation items
 const sidebarItems = [
