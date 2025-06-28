@@ -300,7 +300,7 @@ export default function PatientGroupPage() {
                 {assignments.map((a, idx) => (
                   <tr
                     key={idx}
-                    className="border-t border-gray-100 hover:bg-gray-50"
+                    className="border-t border-gray-100 hover:bg-gray-50 *:text-nowrap"
                   >
                     <td className="py-3 px-4 whitespace-pre-line text-gray-900 text-sm font-medium">
                       {a.date}
@@ -325,7 +325,7 @@ export default function PatientGroupPage() {
                         </span>
                       </div>
                     </td>
-                    <td className="py-3 px-4">
+                    <td className="py-3 px-8">
                       <span
                         className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold ${
                           priorityColors[a.priority]

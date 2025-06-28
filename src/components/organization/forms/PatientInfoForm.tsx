@@ -40,8 +40,11 @@ export default function PatientInfoForm({
     defaultValues: {
       patientGroupName: initialData?.patientGroupName || "",
       location: initialData?.location || "",
-      numberOfPatients: initialData?.numberOfPatients || undefined,
-      priorityLevel: initialData?.priorityLevel || undefined,
+      numberOfPatients:
+        initialData?.numberOfPatients !== undefined
+          ? initialData.numberOfPatients
+          : 0, // FIXED: Use 0 instead of undefined
+      priorityLevel: initialData?.priorityLevel || "", // FIXED: Use empty string instead of undefined
     },
   });
 
@@ -151,6 +154,7 @@ export default function PatientInfoForm({
                       placeholder="Enter the number of patients"
                       className="mt-1 h-11 border-gray-300 rounded-lg"
                       {...field}
+                      value={field.value || ""} // FIXED: Ensure value is never undefined
                       onChange={(e) =>
                         field.onChange(parseInt(e.target.value) || 0)
                       }

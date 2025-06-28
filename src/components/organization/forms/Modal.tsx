@@ -14,7 +14,7 @@ import {
   type ProviderSelectionValues,
 } from "@/schemas";
 import { type Location, type Provider, type Specialty } from "@/types";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface CreatePatientGroupModalProps {
   open: boolean;
@@ -41,17 +41,34 @@ export function CreatePatientGroupModal({
   const [currentStep, setCurrentStep] = useState<ModalStep>("patient-info");
   const [formData, setFormData] = useState<FormData>({});
 
+  // Add useEffect to log step changes for debugging
+  useEffect(() => {
+    console.log("Current step changed to:", currentStep);
+  }, [currentStep]);
+
   const handlePatientInfoNext = (data: PatientGroupFormValues) => {
+    console.log("Patient info data:", data);
     setFormData((prev) => ({ ...prev, patientInfo: data }));
     setCurrentStep("provider-selection");
   };
 
   const handleProviderSelectionNext = async (data: ProviderSelectionValues) => {
-    setFormData((prev) => ({ ...prev, providerSelection: data }));
+    console.log("Provider selection data:", data);
+
+    // Combine all form data properly
+    const updatedFormData = { ...formData, providerSelection: data };
+    const allData = { ...updatedFormData.patientInfo, ...data };
+
+    console.log("Complete patient group data:", allData);
+    console.log("All form data:", updatedFormData);
+
+    // Update form data state
+    setFormData(updatedFormData);
 
     // Here you would typically make an API call to create the patient group
     try {
-      // await createPatientGroup({ ...formData.patientInfo, ...data });
+      // await createPatientGroup(allData);
+      console.log("Setting step to success...");
       setCurrentStep("success");
     } catch (error) {
       console.error("Failed to create patient group:", error);
@@ -64,6 +81,7 @@ export function CreatePatientGroupModal({
   };
 
   const handleGoToAssignment = () => {
+    console.log("Going to assignment...");
     onOpenChange(false);
     // Navigate to assignment page or perform other actions
     // router.push('/assignments');

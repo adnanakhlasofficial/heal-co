@@ -45,13 +45,15 @@ export default function ProviderSelectionForm({
   const form = useForm<ProviderSelectionValues>({
     resolver: zodResolver(providerSelectionSchema),
     defaultValues: {
-      specialty: "neurology",
+      specialty: specialties.length > 0 ? specialties[0].id : "",
       providerId: "",
     },
   });
 
+  const { setValue } = form;
+
   const onSubmit = (data: ProviderSelectionValues) => {
-    onNext({ ...data, providerId: selectedProviderId });
+    onNext(data);
   };
 
   const selectedSpecialty = form.watch("specialty");
@@ -110,7 +112,10 @@ export default function ProviderSelectionForm({
                   <FormLabel className="text-sm font-medium text-gray-700">
                     Specialist
                   </FormLabel>
-                  <Select onValueChange={field.onChange} value={field.value}>
+                  <Select
+                    onValueChange={field.onChange}
+                    value={field.value || ""}
+                  >
                     <FormControl>
                       <SelectTrigger className="mt-1 h-11 border-gray-300 rounded-lg">
                         <SelectValue placeholder="Select specialty" />
@@ -141,7 +146,10 @@ export default function ProviderSelectionForm({
                         ? "border-purple-600 shadow-md"
                         : "border-gray-200 hover:border-gray-300"
                     }`}
-                    onClick={() => setSelectedProviderId(provider.id)}
+                    onClick={() => {
+                      setSelectedProviderId(provider.id);
+                      setValue("providerId", provider.id); // <-- sync to react-hook-form
+                    }}
                   >
                     <CardContent className="p-4">
                       <div className="flex flex-col items-center text-center space-y-3">
@@ -149,6 +157,8 @@ export default function ProviderSelectionForm({
                           <Image
                             src={provider.avatar}
                             alt={provider.name}
+                            width={64}
+                            height={64}
                             className="w-16 h-16 rounded-full object-cover"
                           />
                           {provider.verified && (
@@ -157,7 +167,6 @@ export default function ProviderSelectionForm({
                             </div>
                           )}
                         </div>
-
                         <div className="space-y-1">
                           <div className="flex items-center justify-center space-x-1">
                             <h5 className="font-semibold text-gray-900 text-sm">
@@ -174,7 +183,6 @@ export default function ProviderSelectionForm({
                             {provider.specialty}
                           </p>
                         </div>
-
                         <div className="grid grid-cols-3 gap-2 text-xs w-full">
                           <div className="text-center">
                             <div className="font-semibold text-gray-900">
