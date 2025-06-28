@@ -375,7 +375,7 @@ export default function DashboardPage() {
                       width={36}
                       height={36}
                       alt={doc.name}
-                      className="rounded-full object-cover border"
+                      className="rounded-full h-9 w-9 object-cover border"
                     />
                     <div>
                       <div className="flex items-center gap-1">

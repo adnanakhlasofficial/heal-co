@@ -5,7 +5,7 @@ import Link from "next/link";
 export default function ProfilePage() {
   return (
     <div className="bg-white flex items-center justify-center rounded-lg p-8 shadow-lg">
-      <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-12">
+      <div className="w-full grid grid-cols-1 xl:grid-cols-3 gap-12">
         {/* Profile Card */}
         <div className="flex flex-col">
           {/* Top section: Avatar, Name, Premium */}

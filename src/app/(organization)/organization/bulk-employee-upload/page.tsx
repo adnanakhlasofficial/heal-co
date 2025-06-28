@@ -157,7 +157,7 @@ export default function BulkEmployeeUploadPage() {
               {employees.map((emp) => (
                 <tr
                   key={emp.id}
-                  className="border-t border-gray-100 hover:bg-gray-50"
+                  className="border-t border-gray-100 hover:bg-gray-50 *:text-nowrap"
                 >
                   <td className="py-3 px-4">
                     <input
